@@ -30,3 +30,9 @@ ___
    "C:\Users\JohnnyDoe\source\repository\SuchFunktion\SuchFunktion\bin\Debug\SearchTool.exe" "%V
 9. That´s it! If everything has been done right you should now be able to open the searchtool by right-clicking in a folder.
 Note: The folder where you open the search-tool using the context-menue is automatically set as search folder. Neat!
+
+### -> automatically (using contextmenue adding program):
+1. There are plenty of programs on the web that let you add programs to the contextmenue. In most of these programs you only need to set the .exe file and the icon.
+2. An easy to use program for example is the "KontextemenueCreator" as provided by heise.de:
+   https://www.heise.de/download/product/kontextemenucreator-77196
+
