@@ -19,6 +19,8 @@ namespace SearchTool_Extended_Rebuild
         string fileExtensionFilter = "";
         List<string> fileExtensions = new List<string> { };
         List<FileInfo> globalFileInfoList = new List<FileInfo> { };
+        List<string> globalDirectories= new List<string> { };
+
 
         public Form1()
         {
@@ -146,25 +148,37 @@ namespace SearchTool_Extended_Rebuild
 
         private FileInfo[] getFilesInDirectory(string _directory)
         {
-            DirectoryInfo directoryInfo = new DirectoryInfo(_directory);
-            FileInfo[] files = { };
-
-            try
+            globalDirectories.Clear();
+            List<FileInfo> files = new List<FileInfo>();
+           
+            // get all files in the subdirectories if checkbox is checked
+            if (checkBox_searchSubdirectory.Checked)
             {
-                // get all files in the subdirectories if checkbox is checked
-                if (checkBox_searchSubdirectory.Checked)
+                DirectoryInfo directoryInfo = new DirectoryInfo(_directory);
+                files.AddRange(directoryInfo.GetFiles($"*{textBox_inputSearch.Text}*"));
+
+                getSubDirectories(_directory);
+
+                try
                 {
-                    files = directoryInfo.GetFiles($"*{textBox_inputSearch.Text}*", SearchOption.AllDirectories);
+                    foreach (string directory in globalDirectories)
+                    {
+                        directoryInfo = new DirectoryInfo(directory);
+                        files.AddRange(directoryInfo.GetFiles($"*{textBox_inputSearch.Text}*"));
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    files = directoryInfo.GetFiles($"*{textBox_inputSearch.Text}*");
+                    Console.WriteLine("Error (Directory) 1st: " + ex.Message);
                 }
             }
-            catch
+            else
             {
-
+                DirectoryInfo directoryInfo = new DirectoryInfo(_directory);
+                files.AddRange(directoryInfo.GetFiles($"*{textBox_inputSearch.Text}*"));
             }
+            
+           
             //-----------------------------------------------------------------------------------
             // checking the unit multiplier to convert to MB, GB or KB
             //-----------------------------------------------------------------------------------
@@ -194,7 +208,7 @@ namespace SearchTool_Extended_Rebuild
                 //if checkbox is checked but no values are given -> dont filter anything
                 if(textBox_endSize.Text == "" && textBox_startSize.Text == "") 
                 { 
-                    return files; 
+                    return files.ToArray(); 
                 }
 
                 List<FileInfo> fileInfoList = new List<FileInfo>();
@@ -224,9 +238,27 @@ namespace SearchTool_Extended_Rebuild
                 }
                 return fileInfoList.ToArray();
             }
-            return files;
+            return files.ToArray();
         }
+        public void getSubDirectories(string DirectoryPath)
+        {
+            string[] directories = { };
+            try
+            {
+                directories = Directory.GetDirectories(DirectoryPath);
+            }
+            catch(Exception ex)
+            {
+                label_errorOutput.Text = "Error: " + ex.Message;
+            }
 
+            foreach (string directory in directories)
+            {
+                globalDirectories.Add(directory);
+                getSubDirectories(directory);
+            }
+
+        }
         private void showSearchResultsOnList()
         {
             FileInfo[] files = { };
@@ -235,6 +267,7 @@ namespace SearchTool_Extended_Rebuild
             if(fileExtensionFilter=="")
             {
                 globalFileInfoList.Clear();
+                
                 files = getFilesInDirectory(folderBrowserDialog_searchFolder.SelectedPath);
 
                 foreach (FileInfo file in files)
@@ -272,11 +305,6 @@ namespace SearchTool_Extended_Rebuild
                 }
             }
 
-         
-
-
-            //label1.Text = globalFileInfoList.Count.ToString();
-
            // comboBox_filterExtension.Items.Add(fileExtensions);
             dataGridView_searchResults.DataSource = fileList;
             //-----------------------------------------------------------------------------------
@@ -294,7 +322,41 @@ namespace SearchTool_Extended_Rebuild
             List<ShowFiles> fileList = new List<ShowFiles>();
            
             files = globalFileInfoList.ToArray();
+            if (checkBox_sizeFilter.Checked)
+            {
+                //if checkbox is checked but no values are given -> dont filter anything
+                if (textBox_endSize.Text == "" && textBox_startSize.Text == "")
+                {
+                    files = globalFileInfoList.ToArray();
+                }
 
+                List<FileInfo> fileInfoList = new List<FileInfo>();
+
+                double startSize = 0;
+                double endSize = Double.PositiveInfinity;
+
+
+                //-----------------------------------------------------------------------------------
+                // checking if not set and if the given value can be parsed to double if so -> use it
+                //-----------------------------------------------------------------------------------
+                if (textBox_startSize.Text != "" && double.TryParse(textBox_startSize.Text, out _))
+                {
+                    startSize = Convert.ToDouble(textBox_startSize.Text);
+                }
+                if (textBox_endSize.Text != "" && double.TryParse(textBox_endSize.Text, out _))
+                {
+                    endSize = Convert.ToDouble(textBox_endSize.Text);
+                }
+                
+                foreach (FileInfo fileInfo in files)
+                {
+                    if (fileInfo.Length / unitMultiplier >= startSize && fileInfo.Length / unitMultiplier <= endSize)
+                    {
+                        fileInfoList.Add(fileInfo);
+                    }
+                }
+                files = fileInfoList.ToArray();
+            }
             //den Switch vielleicht noch auslagern
             switch (comboBox_sizeUnit.Text)
             {
