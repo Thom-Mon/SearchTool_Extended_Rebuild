@@ -17,10 +17,8 @@ namespace SearchTool_Extended_Rebuild
         float unitMultiplier = 1;
         int currentMouseOverRow = 0;  
         string fileExtensionFilter = "";
-        List<string> fileExtensions = new List<string> { };
         List<FileInfo> globalFileInfoList = new List<FileInfo> { };
         List<string> globalDirectories= new List<string> { };
-
 
         public Form1()
         {
@@ -39,6 +37,10 @@ namespace SearchTool_Extended_Rebuild
             public string LastWritingTime { get; set; }
         }
 
+        //-----------------------------------------------------------------------------------
+        // Handles the Startparameter that might be given if the program is used to start within
+        // the context-menue (has to be setup in the Registry first)
+        //-----------------------------------------------------------------------------------
         public void showStartParameter()
         {
             string[] CommandLineArgs = Environment.GetCommandLineArgs();
@@ -59,7 +61,7 @@ namespace SearchTool_Extended_Rebuild
 
         //-----------------------------------------------------------------------------------
         // Context-Menue to make user click on a found file to open it in explorer on a right
-        // click and then "Open in Explorer" or "Filtering by some items"
+        // click or filter the result by additional parameters like the extension
         //-----------------------------------------------------------------------------------
         private void DataGridRightClick_MouseDown(object sender, MouseEventArgs e)
         {
@@ -105,6 +107,7 @@ namespace SearchTool_Extended_Rebuild
         {
             showSearchResultsOnDatagrid_FromPreset();
         }
+
         private void button_selectFolder_Click(object sender, EventArgs e)
         {
             DialogResult result = folderBrowserDialog_searchFolder.ShowDialog();
@@ -117,12 +120,12 @@ namespace SearchTool_Extended_Rebuild
 
         private void button_startSearch_Click(object sender, EventArgs e)
         {
-            //comboBox_filterExtension.Items.Clear();
-            fileExtensions.Clear();
-
             showSearchResultsOnList();
         }
 
+        //-----------------------------------------------------------------------------------
+        // If enter is pressed on search-string perform search on filesystem
+        //-----------------------------------------------------------------------------------
         private void IsEnterPressed(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -132,6 +135,21 @@ namespace SearchTool_Extended_Rebuild
             }
         }
 
+        //-----------------------------------------------------------------------------------
+        // If enter is pressed on textbox in filter perform search on list of found files only
+        //-----------------------------------------------------------------------------------
+        private void IsEnterPressedOnFilter(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                showSearchResultsOnDatagrid_FromPreset();
+                e.SuppressKeyPress = true;
+            }
+        }
+
+        //-----------------------------------------------------------------------------------
+        // Toogle visibility of textboxes to enter from-to on sizeFilter
+        //-----------------------------------------------------------------------------------
         private void checkBox_sizeFilter_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox_sizeFilter.Checked)
@@ -145,7 +163,12 @@ namespace SearchTool_Extended_Rebuild
                 textBox_endSize.Visible = false;
             }
         }
-
+        //-----------------------------------------------------------------------------------
+        // main-function:
+        // -> Clears previous search-results
+        // -> Gets all files if checked from all subdirectories, using the checked filters
+        // -> 
+        //-----------------------------------------------------------------------------------
         private FileInfo[] getFilesInDirectory(string _directory)
         {
             globalDirectories.Clear();
@@ -177,12 +200,54 @@ namespace SearchTool_Extended_Rebuild
                 DirectoryInfo directoryInfo = new DirectoryInfo(_directory);
                 files.AddRange(directoryInfo.GetFiles($"*{textBox_inputSearch.Text}*"));
             }
-            
            
             //-----------------------------------------------------------------------------------
-            // checking the unit multiplier to convert to MB, GB or KB
+            // checking and setting the unit multiplier to convert to MB, GB or KB
             //-----------------------------------------------------------------------------------
-            unitMultiplier = 1;
+            unitMultiplier = getUnitMultiplier();
+            
+            if (checkBox_sizeFilter.Checked) 
+            {
+                //if checkbox is checked but no values are given -> dont filter anything
+                if(textBox_endSize.Text == "" && textBox_startSize.Text == "") 
+                { 
+                    return files.ToArray(); 
+                }
+
+                List<FileInfo> fileInfoList = new List<FileInfo>();
+
+                double startSize = 0;
+                double endSize = Double.PositiveInfinity;
+                
+                //-----------------------------------------------------------------------------------
+                // checking if not set and if the given value can be parsed to double if so -> use it
+                //-----------------------------------------------------------------------------------
+                if (textBox_startSize.Text != "" && double.TryParse(textBox_startSize.Text, out _)) 
+                {
+                    startSize = Convert.ToDouble(textBox_startSize.Text);
+                }
+                if (textBox_endSize.Text != "" && double.TryParse(textBox_endSize.Text, out _)) 
+                {
+                    endSize = Convert.ToDouble(textBox_endSize.Text);
+                }
+                
+                foreach (FileInfo fileInfo in files)
+                {
+                    if (fileInfo.Length / unitMultiplier >= startSize && fileInfo.Length / unitMultiplier <= endSize) 
+                    {
+                        fileInfoList.Add(fileInfo);
+                    }
+                }
+                return fileInfoList.ToArray();
+            }
+            return files.ToArray();
+        }
+
+        //-----------------------------------------------------------------------------------
+        // reads the value from the combobox and sets it to the global unitmultiplier
+        //-----------------------------------------------------------------------------------
+        private float getUnitMultiplier()
+        {
             switch (comboBox_sizeUnit.Text)
             {
                 case "GB":
@@ -201,45 +266,12 @@ namespace SearchTool_Extended_Rebuild
                     unitMultiplier = 1;
                     break;
             }
-
-            // If sizecheck is checked
-            if (checkBox_sizeFilter.Checked) 
-            {
-                //if checkbox is checked but no values are given -> dont filter anything
-                if(textBox_endSize.Text == "" && textBox_startSize.Text == "") 
-                { 
-                    return files.ToArray(); 
-                }
-
-                List<FileInfo> fileInfoList = new List<FileInfo>();
-
-                double startSize = 0;
-                double endSize = Double.PositiveInfinity;
-                
-
-                //-----------------------------------------------------------------------------------
-                // checking if not set and if the given value can be parsed to double if so -> use it
-                //-----------------------------------------------------------------------------------
-                if (textBox_startSize.Text != "" && double.TryParse(textBox_startSize.Text, out _)) 
-                {
-                    startSize = Convert.ToDouble(textBox_startSize.Text);
-                }
-                if (textBox_endSize.Text != "" && double.TryParse(textBox_endSize.Text, out _)) 
-                {
-                    endSize = Convert.ToDouble(textBox_endSize.Text);
-                }
-                Console.WriteLine(unitMultiplier);
-                foreach (FileInfo fileInfo in files)
-                {
-                    if (fileInfo.Length / unitMultiplier >= startSize && fileInfo.Length / unitMultiplier <= endSize) 
-                    {
-                        fileInfoList.Add(fileInfo);
-                    }
-                }
-                return fileInfoList.ToArray();
-            }
-            return files.ToArray();
+            return unitMultiplier;
         }
+
+        //-----------------------------------------------------------------------------------
+        // Gets all Subdirectories if "Subdirectory" is checked to perform filesearch on them
+        //-----------------------------------------------------------------------------------
         public void getSubDirectories(string DirectoryPath)
         {
             string[] directories = { };
@@ -257,10 +289,18 @@ namespace SearchTool_Extended_Rebuild
                 globalDirectories.Add(directory);
                 getSubDirectories(directory);
             }
-
         }
+
+        //-----------------------------------------------------------------------------------
+        // Draws the results of the search on the datagrid-view and therefore triggering the
+        // search on the filesystem. As the file extension filter is set on the datagrid the 
+        // filtering is performed in this function too.
+        // -> sets the display index of the first and second element on the datagrid
+        // -> filecount is set according to what is shown on datagrid
+        //-----------------------------------------------------------------------------------
         private void showSearchResultsOnList()
         {
+            Cursor.Current = Cursors.WaitCursor;
             FileInfo[] files = { };
             List<ShowFiles> fileList = new List<ShowFiles>();
             
@@ -304,20 +344,26 @@ namespace SearchTool_Extended_Rebuild
                     }
                 }
             }
-
-           // comboBox_filterExtension.Items.Add(fileExtensions);
             dataGridView_searchResults.DataSource = fileList;
-            //-----------------------------------------------------------------------------------
-            // Setting the displayindex cause somehow it is random sometimes
-            //-----------------------------------------------------------------------------------
             dataGridView_searchResults.Columns["Filename"].DisplayIndex = 0;
             dataGridView_searchResults.Columns["Path"].DisplayIndex = 1;
+          
             // COUNTERS
             label_fileCount.Text = fileList.Count.ToString();
+            Cursor.Current = Cursors.Default;
         }
 
+        //-----------------------------------------------------------------------------------
+        // Draws the results of the search on the datagrid-view. The drawing is based on the 
+        // filelist created by clicking "search" or hitting the enter button on the searchstring 
+        // textbox. This function is mainly performed if a filter is reset, like the sizefilter 
+        // maximum for example.
+        // This is implemented to perform a much faster filter if a search already has been performed.
+        // -> does the same filtering as "showSearchResultsOnList"
+        //-----------------------------------------------------------------------------------
         private void showSearchResultsOnDatagrid_FromPreset()
         {
+            Cursor.Current = Cursors.WaitCursor;
             FileInfo[] files = { };
             List<ShowFiles> fileList = new List<ShowFiles>();
            
@@ -357,25 +403,8 @@ namespace SearchTool_Extended_Rebuild
                 }
                 files = fileInfoList.ToArray();
             }
-            //den Switch vielleicht noch auslagern
-            switch (comboBox_sizeUnit.Text)
-            {
-                case "GB":
-                    unitMultiplier = 1024 * 1024 * 1024;
-                    break;
-                case "MB":
-                    unitMultiplier = 1024 * 1024;
-                    break;
-                case "KB":
-                    unitMultiplier = 1024;
-                    break;
-                case "Byte":
-                    unitMultiplier = 1;
-                    break;
-                default:
-                    unitMultiplier = 1;
-                    break;
-            }
+            
+            unitMultiplier = getUnitMultiplier();
 
             foreach (FileInfo file in files)
             {
@@ -390,13 +419,12 @@ namespace SearchTool_Extended_Rebuild
                 });
             }
             dataGridView_searchResults.DataSource = fileList;
-            //-----------------------------------------------------------------------------------
-            // Setting the displayindex cause somehow it is random sometimes
-            //-----------------------------------------------------------------------------------
             dataGridView_searchResults.Columns["Filename"].DisplayIndex = 0;
             dataGridView_searchResults.Columns["Path"].DisplayIndex = 1;
+            
             // COUNTERS
             label_fileCount.Text = fileList.Count.ToString();
+            Cursor.Current = Cursors.Default;
         }
 
        
