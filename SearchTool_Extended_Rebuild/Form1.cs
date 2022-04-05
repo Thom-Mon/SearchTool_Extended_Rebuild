@@ -91,7 +91,7 @@ namespace SearchTool_Extended_Rebuild
             string cellValue = dataGridView_searchResults.Rows[currentMouseOverRow].Cells[2].Value.ToString();
             fileExtensionFilter = Path.GetExtension(cellValue);
 
-            showSearchResultsOnList();
+            showSearchResultsOnDatagrid_FromPreset();
         }
         private void clearAllFiltersToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -172,39 +172,49 @@ namespace SearchTool_Extended_Rebuild
         private FileInfo[] getFilesInDirectory(string _directory)
         {
             globalDirectories.Clear();
+            label_errorOutput.Text = "";
             List<FileInfo> files = new List<FileInfo>();
            
             // get all files in the subdirectories if checkbox is checked
             if (checkBox_searchSubdirectory.Checked)
             {
                 DirectoryInfo directoryInfo = new DirectoryInfo(_directory);
-                files.AddRange(directoryInfo.GetFiles($"*{textBox_inputSearch.Text}*"));
-
-                getSubDirectories(_directory);
-
                 try
                 {
-                    foreach (string directory in globalDirectories)
-                    {
-                        directoryInfo = new DirectoryInfo(directory);
-                        files.AddRange(directoryInfo.GetFiles($"*{textBox_inputSearch.Text}*"));
-                    }
+                    files.AddRange(directoryInfo.GetFiles($"*{textBox_inputSearch.Text}*"));
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Error (Directory) 1st: " + ex.Message);
+                    label_errorOutput.Text = "Selected Directory could not be accessed: " + ex.Message;
                 }
+
+                getSubDirectories(_directory);
+
+                foreach (string directory in globalDirectories)
+                {
+                    directoryInfo = new DirectoryInfo(directory);
+                    try { files.AddRange(directoryInfo.GetFiles($"*{textBox_inputSearch.Text}*")); }
+                    catch (Exception ex) { label_errorOutput.Text = "Selected Sub-Directory could not be accessed: " + ex.Message; }
+                }
+               
             }
             else
             {
                 DirectoryInfo directoryInfo = new DirectoryInfo(_directory);
-                files.AddRange(directoryInfo.GetFiles($"*{textBox_inputSearch.Text}*"));
+                try
+                {
+                    files.AddRange(directoryInfo.GetFiles($"*{textBox_inputSearch.Text}*"));
+                }
+                catch (Exception ex)
+                {
+                    label_errorOutput.Text = "Selected Directory could not be accessed: " + ex.Message;
+                }
             }
            
             //-----------------------------------------------------------------------------------
             // checking and setting the unit multiplier to convert to MB, GB or KB
             //-----------------------------------------------------------------------------------
-            unitMultiplier = getUnitMultiplier();
+            setUnitMultiplier();
             
             if (checkBox_sizeFilter.Checked) 
             {
@@ -246,7 +256,7 @@ namespace SearchTool_Extended_Rebuild
         //-----------------------------------------------------------------------------------
         // reads the value from the combobox and sets it to the global unitmultiplier
         //-----------------------------------------------------------------------------------
-        private float getUnitMultiplier()
+        private void setUnitMultiplier()
         {
             switch (comboBox_sizeUnit.Text)
             {
@@ -266,7 +276,6 @@ namespace SearchTool_Extended_Rebuild
                     unitMultiplier = 1;
                     break;
             }
-            return unitMultiplier;
         }
 
         //-----------------------------------------------------------------------------------
@@ -368,6 +377,8 @@ namespace SearchTool_Extended_Rebuild
             List<ShowFiles> fileList = new List<ShowFiles>();
            
             files = globalFileInfoList.ToArray();
+            setUnitMultiplier();
+
             if (checkBox_sizeFilter.Checked)
             {
                 //if checkbox is checked but no values are given -> dont filter anything
@@ -376,7 +387,7 @@ namespace SearchTool_Extended_Rebuild
                     files = globalFileInfoList.ToArray();
                 }
 
-                List<FileInfo> fileInfoList = new List<FileInfo>();
+                List<FileInfo> sizeFiltered_InfoList = new List<FileInfo>();
 
                 double startSize = 0;
                 double endSize = Double.PositiveInfinity;
@@ -398,13 +409,24 @@ namespace SearchTool_Extended_Rebuild
                 {
                     if (fileInfo.Length / unitMultiplier >= startSize && fileInfo.Length / unitMultiplier <= endSize)
                     {
-                        fileInfoList.Add(fileInfo);
+                        sizeFiltered_InfoList.Add(fileInfo);
                     }
                 }
-                files = fileInfoList.ToArray();
+                files = sizeFiltered_InfoList.ToArray();
             }
-            
-            unitMultiplier = getUnitMultiplier();
+
+            if (fileExtensionFilter != "")
+            {
+                List<FileInfo> extensionFiltered_InfoList = new List<FileInfo>();
+                foreach (FileInfo fileInfo in files)
+                {
+                    if (fileExtensionFilter == Path.GetExtension(fileInfo.FullName))
+                    {
+                        extensionFiltered_InfoList.Add(fileInfo);
+                    }
+                }
+                files = extensionFiltered_InfoList.ToArray();
+            }
 
             foreach (FileInfo file in files)
             {
@@ -426,7 +448,5 @@ namespace SearchTool_Extended_Rebuild
             label_fileCount.Text = fileList.Count.ToString();
             Cursor.Current = Cursors.Default;
         }
-
-       
     }
 }
