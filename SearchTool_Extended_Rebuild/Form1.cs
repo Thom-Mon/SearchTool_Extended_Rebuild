@@ -15,10 +15,15 @@ namespace SearchTool_Extended_Rebuild
     public partial class Form1 : Form
     {
         float unitMultiplier = 1;
-        int currentMouseOverRow = 0;  
-        string fileExtensionFilter = "";
+        int currentMouseOverRow = 0;
         List<FileInfo> globalFileInfoList = new List<FileInfo> { };
         List<string> globalDirectories= new List<string> { };
+
+        //Filtering Globals
+        string fileExtensionFilter = "";
+        DateTime fileDate;
+        bool isDateFiltered_before = false;
+        bool isDateFiltered_after = false;
 
         public Form1()
         {
@@ -96,6 +101,24 @@ namespace SearchTool_Extended_Rebuild
         private void clearAllFiltersToolStripMenuItem_Click(object sender, EventArgs e)
         {
             fileExtensionFilter = "";
+            isDateFiltered_before = false;
+            isDateFiltered_after = false;
+
+            showSearchResultsOnDatagrid_FromPreset();
+        }
+        private void createdBeforeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            isDateFiltered_before = true;
+            isDateFiltered_after = false;
+            fileDate = DateTime.Parse(dataGridView_searchResults.Rows[currentMouseOverRow].Cells["CreatedAt"].Value.ToString());
+
+            showSearchResultsOnDatagrid_FromPreset();
+        }
+        private void createdAfterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            isDateFiltered_after = true;
+            isDateFiltered_before = false;
+            fileDate = DateTime.Parse(dataGridView_searchResults.Rows[currentMouseOverRow].Cells["CreatedAt"].Value.ToString());
 
             showSearchResultsOnDatagrid_FromPreset();
         }
@@ -162,6 +185,19 @@ namespace SearchTool_Extended_Rebuild
                 textBox_startSize.Visible = false;
                 textBox_endSize.Visible = false;
             }
+        }
+
+        private void checkBox_dateFilter_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox_dateFilter.Checked)
+            {
+                groupBox_dateOptions.Visible = true;
+            }
+            else
+            {
+                groupBox_dateOptions.Visible = false;
+            }
+            showSearchResultsOnDatagrid_FromPreset();
         }
         //-----------------------------------------------------------------------------------
         // main-function:
@@ -428,6 +464,62 @@ namespace SearchTool_Extended_Rebuild
                 files = extensionFiltered_InfoList.ToArray();
             }
 
+            if (isDateFiltered_before || isDateFiltered_after)
+            {
+                List<FileInfo> dateFiltered_InfoList = new List<FileInfo>();
+                if (isDateFiltered_before)
+                {
+                    foreach (FileInfo fileInfo in files)
+                    {
+                        if (fileInfo.CreationTime <= fileDate)
+                        {
+                            dateFiltered_InfoList.Add(fileInfo);
+                        }
+                    }
+                }
+                if (isDateFiltered_after)
+                {
+                    foreach (FileInfo fileInfo in files)
+                    {
+                        if (DateTime.Parse(fileInfo.CreationTime.ToString()) >= fileDate)
+                        {
+                            dateFiltered_InfoList.Add(fileInfo);
+                        }
+                    }
+                }
+                files = dateFiltered_InfoList.ToArray();
+            }
+
+            if (checkBox_dateFilter.Checked)
+            {
+                DateTime startDate = dateTimePicker_filterStart.Value;
+                DateTime endDate = dateTimePicker_filterEnd.Value;
+                
+                List<FileInfo> dateFilteredByCheckBox_InfoList = new List<FileInfo>();
+
+                //check if the times are different and start is smaller than end if same then do not perform
+                //filter
+                Console.WriteLine(startDate == endDate);
+
+                if (!dateTimePicker_filterStart.Checked && !dateTimePicker_filterEnd.Checked) 
+                {   // label anzeige bauen
+                    foreach (FileInfo fileInfo in files)
+                    {
+                        if (startDate <= fileInfo.CreationTime && endDate >= fileInfo.CreationTime)
+                        {
+                            dateFilteredByCheckBox_InfoList.Add(fileInfo);
+                        }
+                    }
+                    files = dateFilteredByCheckBox_InfoList.ToArray();
+                }
+                else
+                {
+                    label_errorOutput.Text = "Error: Datefilter not working!";
+                }
+                
+            }
+
+
             foreach (FileInfo file in files)
             {
                 fileList.Add(new ShowFiles
@@ -448,5 +540,7 @@ namespace SearchTool_Extended_Rebuild
             label_fileCount.Text = fileList.Count.ToString();
             Cursor.Current = Cursors.Default;
         }
+
+        
     }
 }

@@ -45,17 +45,27 @@
             this.comboBox_sizeUnit = new System.Windows.Forms.ComboBox();
             this.dataGridView_searchResults = new System.Windows.Forms.DataGridView();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.openInExplorerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.filterByThisExtensionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.clearAllFiltersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label_filesFoundCounter = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label_InpautSearchFile = new System.Windows.Forms.Label();
             this.backgroundWorker_searchASYNC = new System.ComponentModel.BackgroundWorker();
             this.label_errorOutput = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.openInExplorerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.filterByThisExtensionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.filterByDateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.createdBeforeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.createdAfterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearAllFiltersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkBox_dateFilter = new System.Windows.Forms.CheckBox();
+            this.dateTimePicker_filterStart = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker_filterEnd = new System.Windows.Forms.DateTimePicker();
+            this.groupBox_dateOptions = new System.Windows.Forms.GroupBox();
+            this.label_dateStart = new System.Windows.Forms.Label();
+            this.label_dateEnd = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_searchResults)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.groupBox_dateOptions.SuspendLayout();
             this.SuspendLayout();
             // 
             // folderBrowserDialog_searchFolder
@@ -108,7 +118,7 @@
             // 
             this.checkBox_searchSubdirectory.AutoSize = true;
             this.checkBox_searchSubdirectory.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_searchSubdirectory.Location = new System.Drawing.Point(228, 57);
+            this.checkBox_searchSubdirectory.Location = new System.Drawing.Point(237, 70);
             this.checkBox_searchSubdirectory.Name = "checkBox_searchSubdirectory";
             this.checkBox_searchSubdirectory.Size = new System.Drawing.Size(94, 19);
             this.checkBox_searchSubdirectory.TabIndex = 7;
@@ -119,7 +129,7 @@
             // 
             this.checkBox_sizeFilter.AutoSize = true;
             this.checkBox_sizeFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_sizeFilter.Location = new System.Drawing.Point(228, 82);
+            this.checkBox_sizeFilter.Location = new System.Drawing.Point(237, 95);
             this.checkBox_sizeFilter.Name = "checkBox_sizeFilter";
             this.checkBox_sizeFilter.Size = new System.Drawing.Size(77, 19);
             this.checkBox_sizeFilter.TabIndex = 8;
@@ -129,7 +139,7 @@
             // 
             // textBox_startSize
             // 
-            this.textBox_startSize.Location = new System.Drawing.Point(361, 82);
+            this.textBox_startSize.Location = new System.Drawing.Point(370, 95);
             this.textBox_startSize.Name = "textBox_startSize";
             this.textBox_startSize.Size = new System.Drawing.Size(53, 20);
             this.textBox_startSize.TabIndex = 9;
@@ -138,7 +148,7 @@
             // 
             // textBox_endSize
             // 
-            this.textBox_endSize.Location = new System.Drawing.Point(420, 81);
+            this.textBox_endSize.Location = new System.Drawing.Point(429, 95);
             this.textBox_endSize.Name = "textBox_endSize";
             this.textBox_endSize.Size = new System.Drawing.Size(52, 20);
             this.textBox_endSize.TabIndex = 10;
@@ -154,7 +164,7 @@
             "KB",
             "MB",
             "GB"});
-            this.comboBox_sizeUnit.Location = new System.Drawing.Point(306, 81);
+            this.comboBox_sizeUnit.Location = new System.Drawing.Point(315, 94);
             this.comboBox_sizeUnit.Name = "comboBox_sizeUnit";
             this.comboBox_sizeUnit.Size = new System.Drawing.Size(49, 21);
             this.comboBox_sizeUnit.TabIndex = 11;
@@ -195,40 +205,21 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView_searchResults.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView_searchResults.RowHeadersWidth = 72;
-            this.dataGridView_searchResults.Size = new System.Drawing.Size(766, 215);
+            this.dataGridView_searchResults.Size = new System.Drawing.Size(831, 218);
             this.dataGridView_searchResults.TabIndex = 13;
             this.dataGridView_searchResults.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DataGridRightClick_MouseDown);
             // 
             // contextMenuStrip1
             // 
+            this.contextMenuStrip1.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(28, 28);
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openInExplorerToolStripMenuItem,
             this.filterByThisExtensionToolStripMenuItem,
+            this.filterByDateToolStripMenuItem,
             this.clearAllFiltersToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(193, 70);
-            // 
-            // openInExplorerToolStripMenuItem
-            // 
-            this.openInExplorerToolStripMenuItem.Name = "openInExplorerToolStripMenuItem";
-            this.openInExplorerToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
-            this.openInExplorerToolStripMenuItem.Text = "Open in Explorer";
-            this.openInExplorerToolStripMenuItem.Click += new System.EventHandler(this.openInExplorerToolStripMenuItem_Click);
-            // 
-            // filterByThisExtensionToolStripMenuItem
-            // 
-            this.filterByThisExtensionToolStripMenuItem.Name = "filterByThisExtensionToolStripMenuItem";
-            this.filterByThisExtensionToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
-            this.filterByThisExtensionToolStripMenuItem.Text = "Filter by this extension";
-            this.filterByThisExtensionToolStripMenuItem.Click += new System.EventHandler(this.filterByThisExtensionToolStripMenuItem_Click);
-            // 
-            // clearAllFiltersToolStripMenuItem
-            // 
-            this.clearAllFiltersToolStripMenuItem.Name = "clearAllFiltersToolStripMenuItem";
-            this.clearAllFiltersToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
-            this.clearAllFiltersToolStripMenuItem.Text = "Clear all Filters";
-            this.clearAllFiltersToolStripMenuItem.Click += new System.EventHandler(this.clearAllFiltersToolStripMenuItem_Click);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(238, 140);
             // 
             // label_filesFoundCounter
             // 
@@ -238,18 +229,6 @@
             this.label_filesFoundCounter.Size = new System.Drawing.Size(61, 13);
             this.label_filesFoundCounter.TabIndex = 14;
             this.label_filesFoundCounter.Text = "Files found:";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox1.Image = global::SearchTool_Extended_Rebuild.Properties.Resources.Logo_Searchfunction;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 9);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(46, 41);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 15;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.button_selectFolder_Click);
             // 
             // label_InpautSearchFile
             // 
@@ -270,11 +249,137 @@
             this.label_errorOutput.TabIndex = 17;
             this.label_errorOutput.Text = "...";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox1.Image = global::SearchTool_Extended_Rebuild.Properties.Resources.Logo_Searchfunction;
+            this.pictureBox1.Location = new System.Drawing.Point(12, 9);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(46, 41);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 15;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.button_selectFolder_Click);
+            // 
+            // openInExplorerToolStripMenuItem
+            // 
+            this.openInExplorerToolStripMenuItem.Image = global::SearchTool_Extended_Rebuild.Properties.Resources.Directory_Logo;
+            this.openInExplorerToolStripMenuItem.Name = "openInExplorerToolStripMenuItem";
+            this.openInExplorerToolStripMenuItem.Size = new System.Drawing.Size(237, 34);
+            this.openInExplorerToolStripMenuItem.Text = "Open in Explorer";
+            this.openInExplorerToolStripMenuItem.Click += new System.EventHandler(this.openInExplorerToolStripMenuItem_Click);
+            // 
+            // filterByThisExtensionToolStripMenuItem
+            // 
+            this.filterByThisExtensionToolStripMenuItem.Image = global::SearchTool_Extended_Rebuild.Properties.Resources.File_Logo;
+            this.filterByThisExtensionToolStripMenuItem.Name = "filterByThisExtensionToolStripMenuItem";
+            this.filterByThisExtensionToolStripMenuItem.Size = new System.Drawing.Size(237, 34);
+            this.filterByThisExtensionToolStripMenuItem.Text = "Filter by this extension";
+            this.filterByThisExtensionToolStripMenuItem.Click += new System.EventHandler(this.filterByThisExtensionToolStripMenuItem_Click);
+            // 
+            // filterByDateToolStripMenuItem
+            // 
+            this.filterByDateToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.createdBeforeToolStripMenuItem,
+            this.createdAfterToolStripMenuItem});
+            this.filterByDateToolStripMenuItem.Image = global::SearchTool_Extended_Rebuild.Properties.Resources.Clock_Logo;
+            this.filterByDateToolStripMenuItem.Name = "filterByDateToolStripMenuItem";
+            this.filterByDateToolStripMenuItem.Size = new System.Drawing.Size(237, 34);
+            this.filterByDateToolStripMenuItem.Text = "Filter by date";
+            // 
+            // createdBeforeToolStripMenuItem
+            // 
+            this.createdBeforeToolStripMenuItem.Name = "createdBeforeToolStripMenuItem";
+            this.createdBeforeToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.createdBeforeToolStripMenuItem.Text = "Created before";
+            this.createdBeforeToolStripMenuItem.Click += new System.EventHandler(this.createdBeforeToolStripMenuItem_Click);
+            // 
+            // createdAfterToolStripMenuItem
+            // 
+            this.createdAfterToolStripMenuItem.Name = "createdAfterToolStripMenuItem";
+            this.createdAfterToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.createdAfterToolStripMenuItem.Text = "Created After";
+            this.createdAfterToolStripMenuItem.Click += new System.EventHandler(this.createdAfterToolStripMenuItem_Click);
+            // 
+            // clearAllFiltersToolStripMenuItem
+            // 
+            this.clearAllFiltersToolStripMenuItem.Image = global::SearchTool_Extended_Rebuild.Properties.Resources.ClearAll_Logo;
+            this.clearAllFiltersToolStripMenuItem.Name = "clearAllFiltersToolStripMenuItem";
+            this.clearAllFiltersToolStripMenuItem.Size = new System.Drawing.Size(237, 34);
+            this.clearAllFiltersToolStripMenuItem.Text = "Clear all Filters";
+            this.clearAllFiltersToolStripMenuItem.Click += new System.EventHandler(this.clearAllFiltersToolStripMenuItem_Click);
+            // 
+            // checkBox_dateFilter
+            // 
+            this.checkBox_dateFilter.AutoSize = true;
+            this.checkBox_dateFilter.Location = new System.Drawing.Point(487, 97);
+            this.checkBox_dateFilter.Name = "checkBox_dateFilter";
+            this.checkBox_dateFilter.Size = new System.Drawing.Size(71, 17);
+            this.checkBox_dateFilter.TabIndex = 18;
+            this.checkBox_dateFilter.Text = "DateFilter";
+            this.checkBox_dateFilter.UseVisualStyleBackColor = true;
+            this.checkBox_dateFilter.CheckedChanged += new System.EventHandler(this.checkBox_dateFilter_CheckedChanged);
+            // 
+            // dateTimePicker_filterStart
+            // 
+            this.dateTimePicker_filterStart.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker_filterStart.Location = new System.Drawing.Point(45, 16);
+            this.dateTimePicker_filterStart.MinDate = new System.DateTime(1970, 3, 8, 0, 0, 0, 0);
+            this.dateTimePicker_filterStart.Name = "dateTimePicker_filterStart";
+            this.dateTimePicker_filterStart.Size = new System.Drawing.Size(94, 20);
+            this.dateTimePicker_filterStart.TabIndex = 19;
+            this.dateTimePicker_filterStart.KeyDown += new System.Windows.Forms.KeyEventHandler(this.IsEnterPressedOnFilter);
+            // 
+            // dateTimePicker_filterEnd
+            // 
+            this.dateTimePicker_filterEnd.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker_filterEnd.Location = new System.Drawing.Point(45, 42);
+            this.dateTimePicker_filterEnd.MinDate = new System.DateTime(1970, 3, 8, 0, 0, 0, 0);
+            this.dateTimePicker_filterEnd.Name = "dateTimePicker_filterEnd";
+            this.dateTimePicker_filterEnd.Size = new System.Drawing.Size(94, 20);
+            this.dateTimePicker_filterEnd.TabIndex = 20;
+            this.dateTimePicker_filterEnd.KeyDown += new System.Windows.Forms.KeyEventHandler(this.IsEnterPressedOnFilter);
+            // 
+            // groupBox_dateOptions
+            // 
+            this.groupBox_dateOptions.Controls.Add(this.label_dateEnd);
+            this.groupBox_dateOptions.Controls.Add(this.dateTimePicker_filterStart);
+            this.groupBox_dateOptions.Controls.Add(this.label_dateStart);
+            this.groupBox_dateOptions.Controls.Add(this.dateTimePicker_filterEnd);
+            this.groupBox_dateOptions.Location = new System.Drawing.Point(552, 5);
+            this.groupBox_dateOptions.Name = "groupBox_dateOptions";
+            this.groupBox_dateOptions.Size = new System.Drawing.Size(291, 115);
+            this.groupBox_dateOptions.TabIndex = 21;
+            this.groupBox_dateOptions.TabStop = false;
+            this.groupBox_dateOptions.Text = "Date-Options";
+            this.groupBox_dateOptions.Visible = false;
+            // 
+            // label_dateStart
+            // 
+            this.label_dateStart.AutoSize = true;
+            this.label_dateStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_dateStart.Location = new System.Drawing.Point(6, 20);
+            this.label_dateStart.Name = "label_dateStart";
+            this.label_dateStart.Size = new System.Drawing.Size(38, 16);
+            this.label_dateStart.TabIndex = 22;
+            this.label_dateStart.Text = "Start:";
+            // 
+            // label_dateEnd
+            // 
+            this.label_dateEnd.AutoSize = true;
+            this.label_dateEnd.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_dateEnd.Location = new System.Drawing.Point(6, 46);
+            this.label_dateEnd.Name = "label_dateEnd";
+            this.label_dateEnd.Size = new System.Drawing.Size(35, 16);
+            this.label_dateEnd.TabIndex = 23;
+            this.label_dateEnd.Text = "End:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(794, 350);
+            this.ClientSize = new System.Drawing.Size(855, 350);
+            this.Controls.Add(this.checkBox_dateFilter);
             this.Controls.Add(this.label_errorOutput);
             this.Controls.Add(this.label_InpautSearchFile);
             this.Controls.Add(this.pictureBox1);
@@ -289,14 +394,17 @@
             this.Controls.Add(this.button_startSearch);
             this.Controls.Add(this.textBox_inputSearch);
             this.Controls.Add(this.label_selectedFolder);
+            this.Controls.Add(this.groupBox_dateOptions);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(806, 378);
+            this.MinimumSize = new System.Drawing.Size(803, 367);
             this.Name = "Form1";
             this.Text = "Search for files    -    Thg Illusions 2022";
             this.SizeChanged += new System.EventHandler(this.SizeChangedAction);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_searchResults)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.groupBox_dateOptions.ResumeLayout(false);
+            this.groupBox_dateOptions.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -324,6 +432,15 @@
         private System.Windows.Forms.Label label_InpautSearchFile;
         private System.ComponentModel.BackgroundWorker backgroundWorker_searchASYNC;
         private System.Windows.Forms.Label label_errorOutput;
+        private System.Windows.Forms.ToolStripMenuItem filterByDateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem createdBeforeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem createdAfterToolStripMenuItem;
+        private System.Windows.Forms.CheckBox checkBox_dateFilter;
+        private System.Windows.Forms.DateTimePicker dateTimePicker_filterStart;
+        private System.Windows.Forms.DateTimePicker dateTimePicker_filterEnd;
+        private System.Windows.Forms.GroupBox groupBox_dateOptions;
+        private System.Windows.Forms.Label label_dateEnd;
+        private System.Windows.Forms.Label label_dateStart;
     }
 }
 

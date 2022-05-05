@@ -121,4 +121,16 @@
   <data name="Logo_Searchfunction" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Logo_Searchfunction.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Clock_Logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Clock_Logo.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ClearAll_Logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\ClearAll_Logo.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Directory_Logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Directory_Logo.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="File_Logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\File_Logo.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
