@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
@@ -65,15 +66,19 @@ namespace SearchTool_Extended_Rebuild
         }
 
         //-----------------------------------------------------------------------------------
-        // Context-Menue to make user click on a found file to open it in explorer on a right
-        // click or filter the result by additional parameters like the extension
+        // Context-Menue to make user click on a found file for additional options
         //-----------------------------------------------------------------------------------
         private void DataGridRightClick_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button != MouseButtons.Right) return;
 
-            dataGridView_searchResults.ClearSelection();
+            Int32 selectedRowCount = dataGridView_searchResults.Rows.GetRowCount(DataGridViewElementStates.Selected);
             
+            if (selectedRowCount <= 1)
+            {
+                dataGridView_searchResults.ClearSelection();
+            }
+
             currentMouseOverRow = dataGridView_searchResults.HitTest(e.X, e.Y).RowIndex;
 
             if (currentMouseOverRow >= 0)
@@ -121,6 +126,17 @@ namespace SearchTool_Extended_Rebuild
             fileDate = DateTime.Parse(dataGridView_searchResults.Rows[currentMouseOverRow].Cells["CreatedAt"].Value.ToString());
 
             showSearchResultsOnDatagrid_FromPreset();
+        }
+        private void copyToClipboardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Int32 selectedRowCount = dataGridView_searchResults.Rows.GetRowCount(DataGridViewElementStates.Selected);
+            StringCollection pathsToCopy = new StringCollection();
+            
+            for (int i = 0; i < selectedRowCount; i++)
+            {
+                pathsToCopy.Add(dataGridView_searchResults.SelectedRows[i].Cells[2].Value.ToString());
+            }
+            Clipboard.SetFileDropList(pathsToCopy);
         }
         //-----------------------------------------------------------------------------------
         // END OF CONTEXTMENU FUNCTIONS
@@ -207,6 +223,10 @@ namespace SearchTool_Extended_Rebuild
         //-----------------------------------------------------------------------------------
         private FileInfo[] getFilesInDirectory(string _directory)
         {
+            if(this.InvokeRequired)
+            {
+                return (FileInfo[])this.Invoke((Func<string, FileInfo[]>)getFilesInDirectory, _directory);
+            }
             globalDirectories.Clear();
             label_errorOutput.Text = "";
             List<FileInfo> files = new List<FileInfo>();
@@ -334,6 +354,12 @@ namespace SearchTool_Extended_Rebuild
                 globalDirectories.Add(directory);
                 getSubDirectories(directory);
             }
+        }
+
+
+        private void backgroundWorker_ProgressChanges(object sender, ProgressChangedEventArgs e)
+        {
+            string text = comboBox_sizeUnit.Text;
         }
 
         //-----------------------------------------------------------------------------------
@@ -541,6 +567,6 @@ namespace SearchTool_Extended_Rebuild
             Cursor.Current = Cursors.Default;
         }
 
-        
+       
     }
 }

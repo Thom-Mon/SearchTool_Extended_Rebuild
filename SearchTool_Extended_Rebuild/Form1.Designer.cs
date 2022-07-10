@@ -45,23 +45,25 @@
             this.comboBox_sizeUnit = new System.Windows.Forms.ComboBox();
             this.dataGridView_searchResults = new System.Windows.Forms.DataGridView();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.label_filesFoundCounter = new System.Windows.Forms.Label();
-            this.label_InpautSearchFile = new System.Windows.Forms.Label();
-            this.backgroundWorker_searchASYNC = new System.ComponentModel.BackgroundWorker();
-            this.label_errorOutput = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.openInExplorerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.filterByThisExtensionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.filterByDateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createdBeforeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createdAfterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearAllFiltersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyToClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label_filesFoundCounter = new System.Windows.Forms.Label();
+            this.label_InpautSearchFile = new System.Windows.Forms.Label();
+            this.backgroundWorker_searchASYNC = new System.ComponentModel.BackgroundWorker();
+            this.label_errorOutput = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.checkBox_dateFilter = new System.Windows.Forms.CheckBox();
             this.dateTimePicker_filterStart = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker_filterEnd = new System.Windows.Forms.DateTimePicker();
             this.groupBox_dateOptions = new System.Windows.Forms.GroupBox();
-            this.label_dateStart = new System.Windows.Forms.Label();
             this.label_dateEnd = new System.Windows.Forms.Label();
+            this.label_dateStart = new System.Windows.Forms.Label();
+            this.label_debug = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_searchResults)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -205,7 +207,7 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView_searchResults.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView_searchResults.RowHeadersWidth = 72;
-            this.dataGridView_searchResults.Size = new System.Drawing.Size(831, 218);
+            this.dataGridView_searchResults.Size = new System.Drawing.Size(825, 217);
             this.dataGridView_searchResults.TabIndex = 13;
             this.dataGridView_searchResults.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DataGridRightClick_MouseDown);
             // 
@@ -217,49 +219,10 @@
             this.openInExplorerToolStripMenuItem,
             this.filterByThisExtensionToolStripMenuItem,
             this.filterByDateToolStripMenuItem,
-            this.clearAllFiltersToolStripMenuItem});
+            this.clearAllFiltersToolStripMenuItem,
+            this.copyToClipboardToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(238, 140);
-            // 
-            // label_filesFoundCounter
-            // 
-            this.label_filesFoundCounter.AutoSize = true;
-            this.label_filesFoundCounter.Location = new System.Drawing.Point(9, 104);
-            this.label_filesFoundCounter.Name = "label_filesFoundCounter";
-            this.label_filesFoundCounter.Size = new System.Drawing.Size(61, 13);
-            this.label_filesFoundCounter.TabIndex = 14;
-            this.label_filesFoundCounter.Text = "Files found:";
-            // 
-            // label_InpautSearchFile
-            // 
-            this.label_InpautSearchFile.AutoSize = true;
-            this.label_InpautSearchFile.Location = new System.Drawing.Point(9, 54);
-            this.label_InpautSearchFile.Name = "label_InpautSearchFile";
-            this.label_InpautSearchFile.Size = new System.Drawing.Size(74, 13);
-            this.label_InpautSearchFile.TabIndex = 16;
-            this.label_InpautSearchFile.Text = "Search String:";
-            // 
-            // label_errorOutput
-            // 
-            this.label_errorOutput.AutoSize = true;
-            this.label_errorOutput.Location = new System.Drawing.Point(65, 37);
-            this.label_errorOutput.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label_errorOutput.Name = "label_errorOutput";
-            this.label_errorOutput.Size = new System.Drawing.Size(16, 13);
-            this.label_errorOutput.TabIndex = 17;
-            this.label_errorOutput.Text = "...";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox1.Image = global::SearchTool_Extended_Rebuild.Properties.Resources.Logo_Searchfunction;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 9);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(46, 41);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 15;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.button_selectFolder_Click);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(238, 174);
             // 
             // openInExplorerToolStripMenuItem
             // 
@@ -290,14 +253,14 @@
             // createdBeforeToolStripMenuItem
             // 
             this.createdBeforeToolStripMenuItem.Name = "createdBeforeToolStripMenuItem";
-            this.createdBeforeToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.createdBeforeToolStripMenuItem.Size = new System.Drawing.Size(178, 24);
             this.createdBeforeToolStripMenuItem.Text = "Created before";
             this.createdBeforeToolStripMenuItem.Click += new System.EventHandler(this.createdBeforeToolStripMenuItem_Click);
             // 
             // createdAfterToolStripMenuItem
             // 
             this.createdAfterToolStripMenuItem.Name = "createdAfterToolStripMenuItem";
-            this.createdAfterToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
+            this.createdAfterToolStripMenuItem.Size = new System.Drawing.Size(178, 24);
             this.createdAfterToolStripMenuItem.Text = "Created After";
             this.createdAfterToolStripMenuItem.Click += new System.EventHandler(this.createdAfterToolStripMenuItem_Click);
             // 
@@ -308,6 +271,58 @@
             this.clearAllFiltersToolStripMenuItem.Size = new System.Drawing.Size(237, 34);
             this.clearAllFiltersToolStripMenuItem.Text = "Clear all Filters";
             this.clearAllFiltersToolStripMenuItem.Click += new System.EventHandler(this.clearAllFiltersToolStripMenuItem_Click);
+            // 
+            // copyToClipboardToolStripMenuItem
+            // 
+            this.copyToClipboardToolStripMenuItem.Name = "copyToClipboardToolStripMenuItem";
+            this.copyToClipboardToolStripMenuItem.Size = new System.Drawing.Size(237, 34);
+            this.copyToClipboardToolStripMenuItem.Text = "Copy to Clipboard";
+            this.copyToClipboardToolStripMenuItem.Click += new System.EventHandler(this.copyToClipboardToolStripMenuItem_Click);
+            // 
+            // label_filesFoundCounter
+            // 
+            this.label_filesFoundCounter.AutoSize = true;
+            this.label_filesFoundCounter.Location = new System.Drawing.Point(9, 104);
+            this.label_filesFoundCounter.Name = "label_filesFoundCounter";
+            this.label_filesFoundCounter.Size = new System.Drawing.Size(61, 13);
+            this.label_filesFoundCounter.TabIndex = 14;
+            this.label_filesFoundCounter.Text = "Files found:";
+            // 
+            // label_InpautSearchFile
+            // 
+            this.label_InpautSearchFile.AutoSize = true;
+            this.label_InpautSearchFile.Location = new System.Drawing.Point(9, 54);
+            this.label_InpautSearchFile.Name = "label_InpautSearchFile";
+            this.label_InpautSearchFile.Size = new System.Drawing.Size(74, 13);
+            this.label_InpautSearchFile.TabIndex = 16;
+            this.label_InpautSearchFile.Text = "Search String:";
+            // 
+            // backgroundWorker_searchASYNC
+            // 
+            this.backgroundWorker_searchASYNC.WorkerReportsProgress = true;
+            this.backgroundWorker_searchASYNC.WorkerSupportsCancellation = true;
+            // 
+            // label_errorOutput
+            // 
+            this.label_errorOutput.AutoSize = true;
+            this.label_errorOutput.Location = new System.Drawing.Point(65, 37);
+            this.label_errorOutput.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label_errorOutput.Name = "label_errorOutput";
+            this.label_errorOutput.Size = new System.Drawing.Size(16, 13);
+            this.label_errorOutput.TabIndex = 17;
+            this.label_errorOutput.Text = "...";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox1.Image = global::SearchTool_Extended_Rebuild.Properties.Resources.Logo_Searchfunction;
+            this.pictureBox1.Location = new System.Drawing.Point(12, 9);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(46, 41);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 15;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.button_selectFolder_Click);
             // 
             // checkBox_dateFilter
             // 
@@ -354,16 +369,6 @@
             this.groupBox_dateOptions.Text = "Date-Options";
             this.groupBox_dateOptions.Visible = false;
             // 
-            // label_dateStart
-            // 
-            this.label_dateStart.AutoSize = true;
-            this.label_dateStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_dateStart.Location = new System.Drawing.Point(6, 20);
-            this.label_dateStart.Name = "label_dateStart";
-            this.label_dateStart.Size = new System.Drawing.Size(38, 16);
-            this.label_dateStart.TabIndex = 22;
-            this.label_dateStart.Text = "Start:";
-            // 
             // label_dateEnd
             // 
             this.label_dateEnd.AutoSize = true;
@@ -374,11 +379,32 @@
             this.label_dateEnd.TabIndex = 23;
             this.label_dateEnd.Text = "End:";
             // 
+            // label_dateStart
+            // 
+            this.label_dateStart.AutoSize = true;
+            this.label_dateStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_dateStart.Location = new System.Drawing.Point(6, 20);
+            this.label_dateStart.Name = "label_dateStart";
+            this.label_dateStart.Size = new System.Drawing.Size(38, 16);
+            this.label_dateStart.TabIndex = 22;
+            this.label_dateStart.Text = "Start:";
+            // 
+            // label_debug
+            // 
+            this.label_debug.AutoSize = true;
+            this.label_debug.Location = new System.Drawing.Point(315, 9);
+            this.label_debug.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label_debug.Name = "label_debug";
+            this.label_debug.Size = new System.Drawing.Size(35, 13);
+            this.label_debug.TabIndex = 22;
+            this.label_debug.Text = "label1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(855, 350);
+            this.ClientSize = new System.Drawing.Size(847, 347);
+            this.Controls.Add(this.label_debug);
             this.Controls.Add(this.checkBox_dateFilter);
             this.Controls.Add(this.label_errorOutput);
             this.Controls.Add(this.label_InpautSearchFile);
@@ -396,7 +422,7 @@
             this.Controls.Add(this.label_selectedFolder);
             this.Controls.Add(this.groupBox_dateOptions);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(803, 367);
+            this.MinimumSize = new System.Drawing.Size(795, 343);
             this.Name = "Form1";
             this.Text = "Search for files    -    Thg Illusions 2022";
             this.SizeChanged += new System.EventHandler(this.SizeChangedAction);
@@ -441,6 +467,8 @@
         private System.Windows.Forms.GroupBox groupBox_dateOptions;
         private System.Windows.Forms.Label label_dateEnd;
         private System.Windows.Forms.Label label_dateStart;
+        private System.Windows.Forms.Label label_debug;
+        private System.Windows.Forms.ToolStripMenuItem copyToClipboardToolStripMenuItem;
     }
 }
 
