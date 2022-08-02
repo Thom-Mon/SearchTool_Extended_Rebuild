@@ -63,7 +63,6 @@
             this.groupBox_dateOptions = new System.Windows.Forms.GroupBox();
             this.label_dateEnd = new System.Windows.Forms.Label();
             this.label_dateStart = new System.Windows.Forms.Label();
-            this.label_debug = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_searchResults)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -80,7 +79,7 @@
             this.label_selectedFolder.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_selectedFolder.Location = new System.Drawing.Point(65, 9);
             this.label_selectedFolder.Name = "label_selectedFolder";
-            this.label_selectedFolder.Size = new System.Drawing.Size(17, 16);
+            this.label_selectedFolder.Size = new System.Drawing.Size(16, 16);
             this.label_selectedFolder.TabIndex = 1;
             this.label_selectedFolder.Text = "...";
             // 
@@ -375,7 +374,7 @@
             this.label_dateEnd.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_dateEnd.Location = new System.Drawing.Point(6, 46);
             this.label_dateEnd.Name = "label_dateEnd";
-            this.label_dateEnd.Size = new System.Drawing.Size(35, 16);
+            this.label_dateEnd.Size = new System.Drawing.Size(34, 16);
             this.label_dateEnd.TabIndex = 23;
             this.label_dateEnd.Text = "End:";
             // 
@@ -385,26 +384,15 @@
             this.label_dateStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_dateStart.Location = new System.Drawing.Point(6, 20);
             this.label_dateStart.Name = "label_dateStart";
-            this.label_dateStart.Size = new System.Drawing.Size(38, 16);
+            this.label_dateStart.Size = new System.Drawing.Size(37, 16);
             this.label_dateStart.TabIndex = 22;
             this.label_dateStart.Text = "Start:";
-            // 
-            // label_debug
-            // 
-            this.label_debug.AutoSize = true;
-            this.label_debug.Location = new System.Drawing.Point(315, 9);
-            this.label_debug.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label_debug.Name = "label_debug";
-            this.label_debug.Size = new System.Drawing.Size(35, 13);
-            this.label_debug.TabIndex = 22;
-            this.label_debug.Text = "label1";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(847, 347);
-            this.Controls.Add(this.label_debug);
+            this.ClientSize = new System.Drawing.Size(849, 350);
             this.Controls.Add(this.checkBox_dateFilter);
             this.Controls.Add(this.label_errorOutput);
             this.Controls.Add(this.label_InpautSearchFile);
@@ -422,7 +410,7 @@
             this.Controls.Add(this.label_selectedFolder);
             this.Controls.Add(this.groupBox_dateOptions);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(795, 343);
+            this.MinimumSize = new System.Drawing.Size(793, 337);
             this.Name = "Form1";
             this.Text = "Search for files    -    Thg Illusions 2022";
             this.SizeChanged += new System.EventHandler(this.SizeChangedAction);
@@ -467,7 +455,6 @@
         private System.Windows.Forms.GroupBox groupBox_dateOptions;
         private System.Windows.Forms.Label label_dateEnd;
         private System.Windows.Forms.Label label_dateStart;
-        private System.Windows.Forms.Label label_debug;
         private System.Windows.Forms.ToolStripMenuItem copyToClipboardToolStripMenuItem;
     }
 }

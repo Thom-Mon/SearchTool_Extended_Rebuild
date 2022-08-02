@@ -566,7 +566,5 @@ namespace SearchTool_Extended_Rebuild
             label_fileCount.Text = fileList.Count.ToString();
             Cursor.Current = Cursors.Default;
         }
-
-       
     }
 }
