@@ -525,9 +525,10 @@ namespace SearchTool_Extended_Rebuild
 
                 //check if the times are different and start is smaller than end if same then do not perform
                 //filter
+                // TODO: Filter not yet implemented!!! -> 04082022
                 Console.WriteLine(startDate == endDate);
 
-                if (!dateTimePicker_filterStart.Checked && !dateTimePicker_filterEnd.Checked) 
+                if (dateTimePicker_filterStart.Checked && dateTimePicker_filterEnd.Checked) 
                 {   // label anzeige bauen
                     foreach (FileInfo fileInfo in files)
                     {
