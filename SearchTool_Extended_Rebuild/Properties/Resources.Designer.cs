@@ -83,6 +83,26 @@ namespace SearchTool_Extended_Rebuild.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Copy_Logo {
+            get {
+                object obj = ResourceManager.GetObject("Copy_Logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Copy_Logo1 {
+            get {
+                object obj = ResourceManager.GetObject("Copy_Logo1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Directory_Logo {
             get {
                 object obj = ResourceManager.GetObject("Directory_Logo", resourceCulture);

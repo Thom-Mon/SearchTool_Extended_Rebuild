@@ -89,6 +89,7 @@
     <None Include="Clock_Logo.PNG" />
     <None Include="Directory_Logo.PNG" />
     <None Include="File_Logo.PNG" />
+    <None Include="Copy_Logo.PNG" />
     <Content Include="SearchFunction_Logo.ico" />
     <Content Include="searchLogo.ico" />
   </ItemGroup>

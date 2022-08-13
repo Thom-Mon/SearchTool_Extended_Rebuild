@@ -56,17 +56,17 @@
             this.label_InpautSearchFile = new System.Windows.Forms.Label();
             this.backgroundWorker_searchASYNC = new System.ComponentModel.BackgroundWorker();
             this.label_errorOutput = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.checkBox_dateFilter = new System.Windows.Forms.CheckBox();
             this.dateTimePicker_filterStart = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker_filterEnd = new System.Windows.Forms.DateTimePicker();
             this.groupBox_dateOptions = new System.Windows.Forms.GroupBox();
             this.label_dateEnd = new System.Windows.Forms.Label();
             this.label_dateStart = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_searchResults)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox_dateOptions.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // folderBrowserDialog_searchFolder
@@ -79,7 +79,7 @@
             this.label_selectedFolder.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_selectedFolder.Location = new System.Drawing.Point(65, 9);
             this.label_selectedFolder.Name = "label_selectedFolder";
-            this.label_selectedFolder.Size = new System.Drawing.Size(16, 16);
+            this.label_selectedFolder.Size = new System.Drawing.Size(17, 16);
             this.label_selectedFolder.TabIndex = 1;
             this.label_selectedFolder.Text = "...";
             // 
@@ -206,7 +206,7 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView_searchResults.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView_searchResults.RowHeadersWidth = 72;
-            this.dataGridView_searchResults.Size = new System.Drawing.Size(825, 217);
+            this.dataGridView_searchResults.Size = new System.Drawing.Size(856, 250);
             this.dataGridView_searchResults.TabIndex = 13;
             this.dataGridView_searchResults.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DataGridRightClick_MouseDown);
             // 
@@ -273,6 +273,7 @@
             // 
             // copyToClipboardToolStripMenuItem
             // 
+            this.copyToClipboardToolStripMenuItem.Image = global::SearchTool_Extended_Rebuild.Properties.Resources.Copy_Logo1;
             this.copyToClipboardToolStripMenuItem.Name = "copyToClipboardToolStripMenuItem";
             this.copyToClipboardToolStripMenuItem.Size = new System.Drawing.Size(237, 34);
             this.copyToClipboardToolStripMenuItem.Text = "Copy to Clipboard";
@@ -310,18 +311,6 @@
             this.label_errorOutput.Size = new System.Drawing.Size(16, 13);
             this.label_errorOutput.TabIndex = 17;
             this.label_errorOutput.Text = "...";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox1.Image = global::SearchTool_Extended_Rebuild.Properties.Resources.Logo_Searchfunction;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 9);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(46, 41);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 15;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.button_selectFolder_Click);
             // 
             // checkBox_dateFilter
             // 
@@ -374,7 +363,7 @@
             this.label_dateEnd.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_dateEnd.Location = new System.Drawing.Point(6, 46);
             this.label_dateEnd.Name = "label_dateEnd";
-            this.label_dateEnd.Size = new System.Drawing.Size(34, 16);
+            this.label_dateEnd.Size = new System.Drawing.Size(35, 16);
             this.label_dateEnd.TabIndex = 23;
             this.label_dateEnd.Text = "End:";
             // 
@@ -384,15 +373,27 @@
             this.label_dateStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_dateStart.Location = new System.Drawing.Point(6, 20);
             this.label_dateStart.Name = "label_dateStart";
-            this.label_dateStart.Size = new System.Drawing.Size(37, 16);
+            this.label_dateStart.Size = new System.Drawing.Size(38, 16);
             this.label_dateStart.TabIndex = 22;
             this.label_dateStart.Text = "Start:";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox1.Image = global::SearchTool_Extended_Rebuild.Properties.Resources.Logo_Searchfunction;
+            this.pictureBox1.Location = new System.Drawing.Point(12, 9);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(46, 41);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 15;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.button_selectFolder_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(849, 350);
+            this.ClientSize = new System.Drawing.Size(880, 382);
             this.Controls.Add(this.checkBox_dateFilter);
             this.Controls.Add(this.label_errorOutput);
             this.Controls.Add(this.label_InpautSearchFile);
@@ -410,15 +411,15 @@
             this.Controls.Add(this.label_selectedFolder);
             this.Controls.Add(this.groupBox_dateOptions);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(793, 337);
+            this.MinimumSize = new System.Drawing.Size(789, 326);
             this.Name = "Form1";
             this.Text = "Search for files    -    Thg Illusions 2022";
             this.SizeChanged += new System.EventHandler(this.SizeChangedAction);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_searchResults)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox_dateOptions.ResumeLayout(false);
             this.groupBox_dateOptions.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
