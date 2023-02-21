@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.folderBrowserDialog_searchFolder = new System.Windows.Forms.FolderBrowserDialog();
             this.label_selectedFolder = new System.Windows.Forms.Label();
@@ -50,6 +50,8 @@
             this.filterByDateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createdBeforeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createdAfterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.setAsStartDateDatefilterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.setAsEndDateDatefilterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearAllFiltersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyToClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label_filesFoundCounter = new System.Windows.Forms.Label();
@@ -176,35 +178,35 @@
             // 
             this.dataGridView_searchResults.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView_searchResults.BackgroundColor = System.Drawing.Color.Gainsboro;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Moccasin;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.ActiveCaption;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.Desktop;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView_searchResults.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Moccasin;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.ActiveCaption;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.Desktop;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView_searchResults.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView_searchResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.SeaGreen;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView_searchResults.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.SeaGreen;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView_searchResults.DefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridView_searchResults.EnableHeadersVisualStyles = false;
             this.dataGridView_searchResults.Location = new System.Drawing.Point(12, 120);
             this.dataGridView_searchResults.Name = "dataGridView_searchResults";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView_searchResults.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView_searchResults.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridView_searchResults.RowHeadersWidth = 72;
             this.dataGridView_searchResults.Size = new System.Drawing.Size(856, 250);
             this.dataGridView_searchResults.TabIndex = 13;
@@ -221,7 +223,7 @@
             this.clearAllFiltersToolStripMenuItem,
             this.copyToClipboardToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(238, 174);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(238, 196);
             // 
             // openInExplorerToolStripMenuItem
             // 
@@ -243,7 +245,9 @@
             // 
             this.filterByDateToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.createdBeforeToolStripMenuItem,
-            this.createdAfterToolStripMenuItem});
+            this.createdAfterToolStripMenuItem,
+            this.setAsStartDateDatefilterToolStripMenuItem,
+            this.setAsEndDateDatefilterToolStripMenuItem});
             this.filterByDateToolStripMenuItem.Image = global::SearchTool_Extended_Rebuild.Properties.Resources.Clock_Logo;
             this.filterByDateToolStripMenuItem.Name = "filterByDateToolStripMenuItem";
             this.filterByDateToolStripMenuItem.Size = new System.Drawing.Size(237, 34);
@@ -252,16 +256,30 @@
             // createdBeforeToolStripMenuItem
             // 
             this.createdBeforeToolStripMenuItem.Name = "createdBeforeToolStripMenuItem";
-            this.createdBeforeToolStripMenuItem.Size = new System.Drawing.Size(178, 24);
+            this.createdBeforeToolStripMenuItem.Size = new System.Drawing.Size(261, 24);
             this.createdBeforeToolStripMenuItem.Text = "Created before";
             this.createdBeforeToolStripMenuItem.Click += new System.EventHandler(this.createdBeforeToolStripMenuItem_Click);
             // 
             // createdAfterToolStripMenuItem
             // 
             this.createdAfterToolStripMenuItem.Name = "createdAfterToolStripMenuItem";
-            this.createdAfterToolStripMenuItem.Size = new System.Drawing.Size(178, 24);
+            this.createdAfterToolStripMenuItem.Size = new System.Drawing.Size(261, 24);
             this.createdAfterToolStripMenuItem.Text = "Created After";
             this.createdAfterToolStripMenuItem.Click += new System.EventHandler(this.createdAfterToolStripMenuItem_Click);
+            // 
+            // setAsStartDateDatefilterToolStripMenuItem
+            // 
+            this.setAsStartDateDatefilterToolStripMenuItem.Name = "setAsStartDateDatefilterToolStripMenuItem";
+            this.setAsStartDateDatefilterToolStripMenuItem.Size = new System.Drawing.Size(261, 24);
+            this.setAsStartDateDatefilterToolStripMenuItem.Text = "Set as StartDate (Datefilter)";
+            this.setAsStartDateDatefilterToolStripMenuItem.Click += new System.EventHandler(this.setAsStartDateDatefilterToolStripMenuItem_Click);
+            // 
+            // setAsEndDateDatefilterToolStripMenuItem
+            // 
+            this.setAsEndDateDatefilterToolStripMenuItem.Name = "setAsEndDateDatefilterToolStripMenuItem";
+            this.setAsEndDateDatefilterToolStripMenuItem.Size = new System.Drawing.Size(261, 24);
+            this.setAsEndDateDatefilterToolStripMenuItem.Text = "Set as EndDate (Datefilter)";
+            this.setAsEndDateDatefilterToolStripMenuItem.Click += new System.EventHandler(this.setAsEndDateDatefilterToolStripMenuItem_Click);
             // 
             // clearAllFiltersToolStripMenuItem
             // 
@@ -393,7 +411,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(880, 382);
+            this.ClientSize = new System.Drawing.Size(892, 386);
             this.Controls.Add(this.checkBox_dateFilter);
             this.Controls.Add(this.label_errorOutput);
             this.Controls.Add(this.label_InpautSearchFile);
@@ -411,7 +429,7 @@
             this.Controls.Add(this.label_selectedFolder);
             this.Controls.Add(this.groupBox_dateOptions);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(789, 326);
+            this.MinimumSize = new System.Drawing.Size(786, 315);
             this.Name = "Form1";
             this.Text = "Search for files    -    Thg Illusions 2022";
             this.SizeChanged += new System.EventHandler(this.SizeChangedAction);
@@ -457,6 +475,8 @@
         private System.Windows.Forms.Label label_dateEnd;
         private System.Windows.Forms.Label label_dateStart;
         private System.Windows.Forms.ToolStripMenuItem copyToClipboardToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem setAsStartDateDatefilterToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem setAsEndDateDatefilterToolStripMenuItem;
     }
 }
 

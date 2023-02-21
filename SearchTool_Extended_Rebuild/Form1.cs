@@ -23,6 +23,8 @@ namespace SearchTool_Extended_Rebuild
         //Filtering Globals
         string fileExtensionFilter = "";
         DateTime fileDate;
+        TimeSpan zeroHour = new TimeSpan(0, 0, 0);
+        TimeSpan finalHour = new TimeSpan(23, 59, 59);
         bool isDateFiltered_before = false;
         bool isDateFiltered_after = false;
 
@@ -108,6 +110,7 @@ namespace SearchTool_Extended_Rebuild
             fileExtensionFilter = "";
             isDateFiltered_before = false;
             isDateFiltered_after = false;
+            checkBox_dateFilter.Checked = false;
 
             showSearchResultsOnDatagrid_FromPreset();
         }
@@ -137,6 +140,27 @@ namespace SearchTool_Extended_Rebuild
                 pathsToCopy.Add(dataGridView_searchResults.SelectedRows[i].Cells[2].Value.ToString());
             }
             Clipboard.SetFileDropList(pathsToCopy);
+        }
+        private void setAsStartDateDatefilterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // set hours and minutes to 00:00 -> because the Datetime from file normally has a hour and minutes
+            fileDate = DateTime.Parse(dataGridView_searchResults.Rows[currentMouseOverRow].Cells["CreatedAt"].Value.ToString());
+            fileDate = fileDate.Date + zeroHour;
+
+            dateTimePicker_filterStart.Value = fileDate;
+            Console.WriteLine(fileDate);
+            checkBox_dateFilter.Checked = true;
+            showSearchResultsOnDatagrid_FromPreset();
+        }
+
+        private void setAsEndDateDatefilterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            fileDate = DateTime.Parse(dataGridView_searchResults.Rows[currentMouseOverRow].Cells["CreatedAt"].Value.ToString());
+            fileDate = fileDate.Date + finalHour;
+
+            dateTimePicker_filterEnd.Value = fileDate;
+            checkBox_dateFilter.Checked = true;
+            showSearchResultsOnDatagrid_FromPreset();
         }
         //-----------------------------------------------------------------------------------
         // END OF CONTEXTMENU FUNCTIONS
@@ -567,5 +591,7 @@ namespace SearchTool_Extended_Rebuild
             label_fileCount.Text = fileList.Count.ToString();
             Cursor.Current = Cursors.Default;
         }
+
+       
     }
 }
