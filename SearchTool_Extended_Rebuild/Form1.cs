@@ -111,6 +111,8 @@ namespace SearchTool_Extended_Rebuild
             isDateFiltered_before = false;
             isDateFiltered_after = false;
             checkBox_dateFilter.Checked = false;
+            dateTimePicker_filterStart.Value = DateTime.Now;
+            dateTimePicker_filterEnd.Value = DateTime.Now;
 
             showSearchResultsOnDatagrid_FromPreset();
         }
