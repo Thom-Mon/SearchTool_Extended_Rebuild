@@ -114,6 +114,7 @@ namespace SearchTool_Extended_Rebuild
             dateTimePicker_filterStart.Value = DateTime.Now;
             dateTimePicker_filterEnd.Value = DateTime.Now;
 
+
             showSearchResultsOnDatagrid_FromPreset();
         }
         private void createdBeforeToolStripMenuItem_Click(object sender, EventArgs e)
